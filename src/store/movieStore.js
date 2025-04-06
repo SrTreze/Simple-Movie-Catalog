@@ -77,9 +77,7 @@ export default {
         getGenres(state) { return state.genres},
         getSelectedGenres(state) { return state.selectedGenre},
         getMovies(state) { return state.movies},
-        getMovieById:(state)=> (id) => { 
-          console.log(id);
-          
+        getMovieById:(state)=> (id) => {
           return state.movies.find(movie => movie.id == id)},
         getTotalMovies(state) { return state.totalMovies},
         getAPIPage(state) { return state.currAPIPage},

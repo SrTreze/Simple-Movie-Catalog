@@ -1,7 +1,9 @@
 <script setup>
-  import { defineProps, reactive } from 'vue';
+  import { defineProps, computed } from 'vue';
+  import {useStore} from 'vuex';
   import { useRouter } from 'vue-router';
   const router=useRouter()
+  const globalStore = useStore();
 
   const props = defineProps({
     movie: {
@@ -9,12 +11,16 @@
       required: true,
     },
   });
-  
+  const isFavorite = computed(() => globalStore.getters['preferencesStore/getIsFavoriteById'](props.movie.id));
+
   const viewDetails = (id) => {
     router.push({ name: 'movieModal', params: {id} });
   };
   const addToFav = () => {
-    console.log('will add to favs');
+    globalStore.dispatch('preferencesStore/addToFavorites', props.movie.id)
+  };
+  const removeFromFav = () => {
+    globalStore.dispatch('preferencesStore/removeFromFavorites', props.movie.id)
   };
   </script>
   <template>
@@ -27,7 +33,8 @@
           <p class="movie-card_year">{{ movie.release_date }}</p>
           <div class="flex block marginb-0">
             <button @click="viewDetails(movie.id)">View Details</button>
-            <button @click="addToFav">+</button>
+            <button v-if="isFavorite" @click="removeFromFav">-</button>
+            <button v-else @click="addToFav">+</button>
           </div>
       </div>
     </div>

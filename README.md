@@ -9,6 +9,11 @@ In the file .env.development, add your access token to 'Bearer'. It should look 
 Bearer='your-access-token'
 ```
 
+before running the app, install the node modules
+```sh
+npm i
+```
+
 To run the app, run the following command on you command line
 ```sh
 npm run dev
@@ -21,3 +26,9 @@ npm run dev
 - When selecting a genre in the combobox, the error ```Uncaught IndexSizeError: Failed to execute 'getRangeAt' on 'Selection': 0 is not a valid index.``` is given, however, this seems to be a browser issue, since it does not happen on safari
 
 - Pagination componet receives 'current page' and 'total pages' as properties instead of using the store/a store module to make the component more flexible and reusable (e.g. if a view to list favorite movies were to be added)
+
+- Filtering was not implemented on time
+
+- Related movies not implemented on time
+
+- Style is still crud (due to lack of time)
