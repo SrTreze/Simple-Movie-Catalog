@@ -32,3 +32,8 @@ npm run dev
 - Related movies not implemented on time
 
 - Style is still crud (due to lack of time)
+
+- Regarding preferences, they're only valid during the session. No implementation was done to persist trhough cookies or localhost
+
+- Tests were not implemented on time
+
