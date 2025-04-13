@@ -46,7 +46,8 @@
                 results per page.</h3>
             <h5>Items {{((currPage-1)*itemsPerPage)+1 }} - {{ ((currPage)*itemsPerPage)}}</h5>
         </div>
-        <div class="p-6 flex justify-center flex-wrap w-full">
+        <!-- <div class="p-6 flex justify-start flex-wrap w-full"> -->
+        <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 w-full">
             <MovieThumb v-for="movie in movies.slice((currPage-1)*itemsPerPage, (currPage-1)*itemsPerPage + itemsPerPage)" :key="movie.id" :movie="movie" />
         </div>
         <Pagination class="flex justify-center space-x-3"
