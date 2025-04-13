@@ -4,9 +4,9 @@ Simple movie catalog in Vue 3 with Vite and Vuex4, using [tmdb](https://develope
 
 ### Compile and Hot-Reload for Development
 
-In the file .env.development, add your access token to 'Bearer'. It should look something like:
+In the file .env.development, add your access token to 'VITE_Bearer'. It should look something like:
 ```
-Bearer='your-access-token'
+VITE_Bearer='your-access-token'
 ```
 
 before running the app, install the node modules
