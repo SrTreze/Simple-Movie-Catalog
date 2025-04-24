@@ -41,7 +41,7 @@
            <div class="movie-thumb-footer flex justify-between items-center">
              <p class="movie-card_year">{{ movie.release_date }}</p>
              <div class="flex block">
-               <button @click="viewDetails(movie.id)" class="mr-2">View Details</button>
+               <button @click="viewDetails(movie.id)" class="mr-2 view_details">View Details</button>
                <button v-if="isFavorite" @click="removeFromFav">-</button>
                <button v-else @click="addToFav">+</button>
               </div>
@@ -143,5 +143,9 @@
   
   button:hover {
     background-color: #058000;
+  }
+
+  .smallThumb .view_details{
+    display: none;
   }
   </style>
