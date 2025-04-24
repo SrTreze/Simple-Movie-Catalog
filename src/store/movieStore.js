@@ -1,4 +1,4 @@
-import {api, getMovieGenres, getMoviesByGenre} from '@/services/themoviedbService.js';
+import {api, getMovieGenres, getMoviesByGenre, getRelatedMovies} from '@/services/themoviedbService.js';
 
 export default {
     namespaced: true,
@@ -11,6 +11,7 @@ export default {
             currAPIPage: 1,
             totalAPIPages: 1,
             pagesPerRequest: 1,
+            relatedMovies: {},
             filters : { year: '' }
         }
     },
@@ -35,6 +36,11 @@ export default {
       },
       setPagesPerRequest(state, numPages) {
         state.pagesPerRequest = numPages;
+      },
+      addToRelatedMovies(state, {movieId, movies}) {
+        console.log(movieId, movies);
+        
+        state.relatedMovies[movieId] = movies;
       },
       setFilters(state, newFilters) {
         state.filters = newFilters;
@@ -66,6 +72,21 @@ export default {
                 console.error('Error fetching movies:', error);
             }
         },
+        async fetchRelatedMovies( {state, commit} , {id, page=1}) {          
+            try {              
+              const relatedMovies = state.relatedMovies[id]
+              if (relatedMovies){
+                return relatedMovies
+              } else {
+                const response = await getRelatedMovies(id, page);
+                console.log('got', response.data.results);
+                commit('addToRelatedMovies', {movieId: id, movies: response.data.results})                
+                return response.results
+              }
+            } catch (error) {
+                console.error('Error fetching movies:', error);
+            }
+        },
         async updateSelectedGenre({commit}, genre) {
           commit('setSelectedGenres', genre);
         },
@@ -83,6 +104,9 @@ export default {
         getAPIPage(state) { return state.currAPIPage},
         getTotalAPIPage(state) { return state.totalAPIPages},
         getPagesPerRequest(state) { return state.pagesPerRequest},
+        getRelatedMoviesById:(state) => (id) => {
+          return state.relatedMovies[id]
+        },
         getFilters(state) { return state.filters},
       },
 }

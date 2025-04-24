@@ -10,7 +10,13 @@
       type: Object,
       required: true,
     },
+    isSmall: {
+      type: Boolean,
+      required: false,
+    },
   });
+  console.log(props.isSmall);
+  
   const isFavorite = computed(() => globalStore.getters['preferencesStore/getIsFavoriteById'](props.movie.id));
 
   const viewDetails = (id) => {
@@ -25,7 +31,7 @@
 
   </script>
   <template>
-    <div class="movie-card flex-1 flex h-60"> <!-- -->
+    <div class="movie-card flex-1 flex h-60" :class="isSmall == true ? 'smallThumb' : ''"> <!-- -->
       <!-- <img :src="'https://image.tmdb.org/t/p/original'+movie.backdrop_path" :alt="movie.title" class="movie-card_poster" /> -->
       <div :style="{'background-image': `url('https://image.tmdb.org/t/p/original${movie.backdrop_path}'`}" :alt="movie.title" class="movie-card_poster">
         <div class="movie-card_details">
@@ -50,7 +56,7 @@
     /* display: flex; */
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    min-width: 300px;
+    /* min-width: 100px; */
     max-width: 400px;
     overflow: hidden;
     transition: transform 0.2s ease;
@@ -66,6 +72,13 @@
     transform: scale(1.05);
   }
   
+  .movie-card.smallThumb {
+    width: 200px;
+    height: 200px;
+    margin: 6px;
+    flex: 0 0 auto
+  }
+
   .movie-card_poster {
     width: 100%;
     height: 100%;

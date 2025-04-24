@@ -16,4 +16,8 @@ async function getMoviesByGenre(genre, page=1, sort='popularity.desc', adult=fal
     return api.get(`discover/movie?include_adult=${adult}&include_video=false&language=en-US&page=${page}&sort_by=${sort}&with_genres=${genre}`)
 }
 
-export {api, getMovieGenres, getMoviesByGenre};
+async function getRelatedMovies(id, page=1, lang='en-US'){
+    return api.get(`movie/${id}/recommendations?language=${lang}&page=${page}`)
+}
+
+export {api, getMovieGenres, getMoviesByGenre, getRelatedMovies};
